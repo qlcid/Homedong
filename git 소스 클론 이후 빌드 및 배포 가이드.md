@@ -1,6 +1,6 @@
-# Openvidu 백엔드 및 프론트엔드 배포, SSL 인증서
+# Openvidu 배포, 백엔드 및 프론트엔드 배포, SSL 인증서 적용
 
-## Openvidu 배포
+## Openvidu on-premise 배포
 
 ---
 
@@ -89,8 +89,8 @@ IDE 버전
 JVM, jdk (java) 버전
 
 - openjdk version "1.8.0_192"
-OpenJDK Runtime Environment (Zulu 8.33.0.1-win64) (build 1.8.0_192-b01)
-OpenJDK 64-Bit Server VM (Zulu 8.33.0.1-win64) (build 25.192-b01, mixed mode)
+  OpenJDK Runtime Environment (Zulu 8.33.0.1-win64) (build 1.8.0_192-b01)
+  OpenJDK 64-Bit Server VM (Zulu 8.33.0.1-win64) (build 25.192-b01, mixed mode)
 
 배포 라이브러리 버전
 
@@ -106,7 +106,7 @@ git clonehttps://lab.ssafy.com/s05-webmobile1-sub3/S05P13A608.git
 
 ### 2. redis_db 배포
 
-해당 프로젝트에서는 redis를 사용하였습니다.  도커를 이용하여 redis를 다음과 같이 실행합니다. 백엔드 배포 전에 이 과정이 반드시 선행되어야 합니다.
+해당 프로젝트에서는 redis를 사용하였습니다. 도커를 이용하여 redis를 다음과 같이 실행합니다. 백엔드 배포 전에 이 과정이 반드시 선행되어야 합니다.
 
 ```bash
 docker run -p 8379:6379 --name redis_db -d redis
@@ -356,7 +356,7 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.5.2'
 
     implementation 'org.springframework.boot:spring-boot-starter-mail'
-    
+
     // Openvidu 의존성
     implementation group: 'io.openvidu', name: 'openvidu-java-client', version: '2.18.0'
 
@@ -430,7 +430,7 @@ server {
 }
 ```
 
-그 후에 차례로 명령을 실행한다. 
+그 후에 차례로 명령을 실행한다.
 
 ```bash
 sudo ln -s /etc/nginx/sites-available/[파일명] /etc/nginx/sites-enabled/[파일명]
@@ -441,4 +441,4 @@ sudo nginx -t
 sudo systemctl restart nginx
 ```
 
-이렇게 실행하면, http로 80포트 접근시, 443 포트(https)로 리다이렉트 된다. 그리고 백엔드 url을 /api/**로 분기처리할 수 있다. `https://도메인주소` 로 접근하면 배포한 웹 페이지에 접속할 수 있게된다. 이것으로 배포 과정을 마친다.
+이렇게 실행하면, http로 80포트 접근시, 443 포트(https)로 리다이렉트 된다. 그리고 백엔드 url을 /api/\*\*로 분기처리할 수 있다. `https://도메인주소` 로 접근하면 배포한 웹 페이지에 접속할 수 있게된다. 이것으로 배포 과정을 마친다.
